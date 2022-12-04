@@ -1,0 +1,23 @@
+services:
+  api:
+    image: awesome/webapp
+    ports:
+      - "8000:8000"
+    networks:
+      - front-tier
+      - back-tier
+    configs:
+      - httpd-config
+    secrets:
+      - MYSQL_ROOT_PASSWORD
+      - 
+  mysql:
+    image: mysql
+    ports: 
+      - "3306:3306"
+    volumes:
+      - /data:/var/lib/mysql
+    networks:
+      - back-tier
+    secrets:
+      - MYSQL_ROOT_PASSWORD
